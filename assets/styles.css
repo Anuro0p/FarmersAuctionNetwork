@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    margin: 0;
+
+    
+  }
+
+
+.bg {
+    
+    background-image: url("indexBackground1.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+
+.rb{
+    border: 1px solid red;
+}
+
+.bb{
+    border: 1px solid black;
+}
+
+
