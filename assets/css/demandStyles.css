@@ -1,0 +1,15 @@
+img{
+    height: fit-content;
+}
+
+.bg-imgo{
+    background: url(../New-method-to-increase-crop-growth-can-help-feed-growing-population-730x410.jpg);
+    background-size: cover;
+}
+.hei-100{
+    height: 100%;
+}
+
+.add-mar{
+    margin-bottom: auto;
+}
