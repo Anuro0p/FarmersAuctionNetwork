@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auctions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/auctionstyle.css">
+</head>
+
+<body>
+    <!--Navbar-->
+    <div class="navigation">
+        <nav class="navig-bar">
+            <div class="logo">
+                Farmer Network
+            </div>
+            <ul class="navig-items">
+                <li><a href="./FarmerHome.html">Home</a></li>
+                <li><a href="#">Auctions</a></li>
+                <li><a href="#">Demands</a></li>
+            </ul>
+            <div class="logout-btn">
+                <a href="#">Logout</a>
+            </div>
+        </nav>
+        <div class="navig-border"></div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary button-pos" data-toggle="modal" data-target="#auctionModalCenter">
+    New Auction
+  </button>
+    <!-- Modal -->
+    <div class="modal fade" id="auctionModalCenter" tabindex="-1" role="dialog" aria-labelledby="auctionModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="auctionModelTitle" style="font-weight: 600;">New Auction</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#">
+
+                        <div class="form-group">
+                            <label for="cropSelect">Select the Crop</label>
+                            <select class="form-control" id="cropSelect">
+                                  <option>Wheat</option>
+                                  <option>Rice</option>
+                                  <option>Coconot</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantityCrop">Enter the quantity in Kg(s)</label>
+                            <input type="number" class="form-control" name="quantityCrop" placeholder="Enter quantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="basePrize">Enter the base price for the auction</label>
+                            <input type="number" class="form-control" name="basePrize" placeholder="Amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Decription</label>
+                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" placeholder="Enter description if any..." rows="3"></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="consentCheck" required>
+                            <label class="form-check-label" for="consentCheck">Above details are correct and initiate auction</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Start</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Auction Container-->
+    <div class="auction-container">
+        <h2>Current Auctions</h2>
+        <div class="auction-main">
+            <img src="./assets/wheat.png" class="auct-img">
+            <ul class="auct-items">
+                <li> Crop: <span style="font-weight: 600;">Wheat (10kg)</span></li>
+                <li>Time Remaining: <span style="font-weight: 600;">01:00:00</span></li>
+                <li> <span style="font-size: small;">Description: Wheat is a home grown and is of the highest quality</span></li>
+            </ul>
+            <div class="bid-items">
+                <li>Highest Bid: <span style="color: #94ee92;font-weight: 600;">₹ 15,000</span></li>
+                <li>By: <span style="font-weight: 600;">Athul Dinesan</span></li>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Bid</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Bid Your Amount</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="basePrize" style="color: black;">Enter your bid amount for the crop</label>
+                                    <input type="number" class="form-control" name="basePrize" placeholder="Amount" required>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Place</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="auction-main">
+            <img src="./assets/coconut.png" class="auct-img">
+            <ul class="auct-items">
+                <li> Crop: <span style="font-weight: 600;">Coconut (10kg)</span></li>
+                <li>Time Remaining: <span style="font-weight: 600;">01:00:00</span></li>
+                <li> <span style="font-size: small;">Description: Superior quality coconuts</span></li>
+            </ul>
+            <div class="bid-items">
+                <li>Highest Bid: <span style="color: #94ee92;font-weight: 600;">₹ 15,000</span></li>
+                <li>By: <span style="font-weight: 600;">Anjali Soorej</span></li>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Bid</button>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
