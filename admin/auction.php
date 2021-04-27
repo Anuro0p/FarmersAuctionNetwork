@@ -1,6 +1,6 @@
 <?php
 include ("dbconfig.php");
-session_start();
+include ("session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,12 +36,8 @@ session_start();
 </head>
 <body>
 <?php 
-
-$month = date('m');
-$day = date('d');
-$year = date('Y');
-
-$today = $year . '-' . $month . '-' . $day;
+$today = date('Y-m-d');
+//echo $today;
 ?>
     <div class="container-fluid">
 

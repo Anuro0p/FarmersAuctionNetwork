@@ -105,7 +105,6 @@ $password=md5($pass);
             }?>
               <input name="submit" id="login" class="btn btn-block login-btn" type="submit" value="Login">
             </form>
-            <a href="#!" class="forgot-password-link">Forgot password?</a>
             <p class="login-wrapper-footer-text">Don't have an account? <a href="registration" class="text-reset">Register here</a></p>
         </div>
           </div>

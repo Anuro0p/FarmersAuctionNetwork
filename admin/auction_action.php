@@ -1,6 +1,7 @@
 <?php
 include ("dbconfig.php");
-session_start();
+include ("session.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +96,9 @@ $today = $year . '-' . $month . '-' . $day;
                             <a class="nav-link pl-0  font-weight-bold text-dark" href="admin_index.php"><span class="d-none d-md-inline">Home</span></a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link pl-0 font-weight-bold text-dark" href="verify.php"> <span class="d-none d-md-inline">Verification</span></a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link pl-0 font-weight-bold text-dark" href="auction.php"><span class="d-none d-md-inline">Auction</span></a>
                         </li>
                         <li class="nav-item">
@@ -125,19 +129,37 @@ $today = $year . '-' . $month . '-' . $day;
                         </div>
                     <div class="col-2"></div>
 <?php
-$sql1="SELECT * from farmer";
+$date=$_POST['date'];
+$sql1="SELECT fname,rname,quantity,date,crop,currprize,status from auction,farmer,retailer where auction.date='$date' and auction.fid=farmer.fid and retailer.rid=auction.rid";
 $s1=mysqli_query($con,$sql1);
 while(($row=mysqli_fetch_array($s1))==TRUE)
-{?>
+{
+if($row['status']==0)
+$bid_status="Online";
+else
+$bid_status="Offline";
+?>
                     <div class="profile-container" style="margin-top:30px;">
                         <ul class="profile-items">
-                            <li id="profile-name"><?php echo $row[1];?></li><br>
-                            <li><span id="profile-info">Status:</span> Online</li>
-                            <li><span id="profile-info">Total Auctions:</span> 27</li>
-                            <li><span id="profile-info">Total Earnings:</span> ₹ 27,000</li>
+                        <li style="font-size:large;">Farmer: <span id="profile-info"><?php echo $row['fname'];?></span><span style="margin-left:20px;">Retailer: </span><span id="profile-info"><?php echo $row[1];?></span></li>
+                        <li>Crop: <span id="profile-info"><?php echo $row['crop'];?></span></li> 
+                        <li>Quantity: <span id="profile-info"><?php echo $row['quantity'];?></span></li>
+                        <li>Highest Bid: <span id="profile-info"> ₹ <?php echo $row[5];?></span></li>
+                        <li>Date: <span id="profile-info"><?php echo $row['date'];?></span></li>
+                        <li>Auction Status: <span id="profile-info"><?php echo $bid_status;?></span></li>
                         </ul>
-                <img src="FarmerAvatar.png" class="farmer-avatar">
-                    </div>
+                <?php
+                    if($row['crop']=="wheat"){
+                        echo"<img src='wheat.png' class='farmer-avatar'>"; 
+                        }
+                        else if($row['crop']=="coconut"){
+                        echo"<img src='coconut.png' class='farmer-avatar'>";
+                        }
+                        else{
+                        echo"<img src='rice.png' class='farmer-avatar'>";
+                        }
+                ?>                    
+                </div>
 <?php
 } ?>
             </div>

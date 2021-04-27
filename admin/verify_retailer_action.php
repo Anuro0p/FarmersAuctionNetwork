@@ -1,6 +1,6 @@
 <?php
 include ("dbconfig.php");
-session_start();
+include ("session.php");
 $id=$_GET['id1'];
 $sql2="UPDATE retailer set isVerified=1 where rid=$id";
 $result1=mysqli_query($con,$sql2);
