@@ -9,8 +9,7 @@ if(isset($_POST['Submit']))
     $date = date('Y-m-d');
     $quantity =$_POST['quantity']; 
     $description =$_POST['description'];
-    //$insertquery='INSERT INTO retailerdemand (`rid`, `crop`, `bazeprize`,`status`, `date`, `quantity`, `description`) VALUES (1,"rice",10,0,20211210,10,"ogei");';
-    $insertquery="INSERT INTO retailerdemand (`rid`, `crop`, `bazeprize`,`status`, `date`, `quantity`, `description`) VALUES (1,'$crop',$price,0,$date,$quantity,'$description')";
+    $insertquery="INSERT INTO retailerdemand (`rid`, `crop`, `bazeprize`,`status`, `date`, `quantity`, `description`) VALUES (1,'$crop',$price,0,'$date',$quantity,'$description')";
     $result=(mysqli_query($con,$insertquery));
         if($result)
         echo"success.";
