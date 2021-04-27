@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("dbConfig.php");
+echo".";
 if(isset($_POST['Submit'])) 
 {
     $rid=$_SESSION['rid'];
@@ -11,8 +12,8 @@ if(isset($_POST['Submit']))
     $description =$_POST['description'];
     $insertquery="INSERT INTO retailerdemand (`rid`, `crop`, `bazeprize`,`status`, `date`, `quantity`, `description`) VALUES (1,'$crop',$price,0,'$date',$quantity,'$description')";
     $result=(mysqli_query($con,$insertquery));
-        if($result)
-        echo"success.";
+    echo "<script>alert('success..');</script>";
+    header("location:")    
 }
 ?>
 
