@@ -8,7 +8,7 @@ $phone=$_POST['phone'];
 $pass=$_POST['password'];
 $password=md5($pass);
 	$_SESSION['phone']=$phone;
-	$sql1="select phone,passwd from retailer where phone=$phone";
+	$sql1="select rid,phone,passwd from retailer where phone=$phone";
 	$result1=mysqli_query($con,$sql1);
     $data1=mysqli_fetch_assoc($result1);
     $count1 = mysqli_num_rows($result1);	
@@ -16,8 +16,10 @@ $password=md5($pass);
         {
             if($data1["passwd"]==$password)
             {
-                $_SESSION['phone']=$phone; 
-                header("Location: index.html");
+                $_SESSION['phone']=$phone;
+                $_SESSION['rid']=$data1['rid'];
+                $_SESSION['user']="retailer";
+                header("Location: RetailerHome.php");
                 exit;
             }
             else
@@ -29,7 +31,7 @@ $password=md5($pass);
         {
             $f=1;
         }
-    $sql2="select phone,passwd from farmer where phone=$phone";
+    $sql2="select fid,phone,passwd from farmer where phone=$phone";
 	$result2=mysqli_query($con,$sql2);
     $data2=mysqli_fetch_assoc($result2);
     $count2 = mysqli_num_rows($result2);
@@ -37,8 +39,10 @@ $password=md5($pass);
     {
         if($data2["passwd"]==$password)
         {
-            $_SESSION['phone']=$phone; 
-            header("Location: index.html");
+            $_SESSION['phone']=$phone;
+            $_SESSION['fid']=$data2["fid"];
+            $_SESSION['user']="farmer";
+            header("Location: FarmerHome.php");
             exit;
         }
         else
