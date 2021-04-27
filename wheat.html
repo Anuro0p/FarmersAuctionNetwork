@@ -1,0 +1,51 @@
+<!--Auction Container-->
+<div class="auction-container">
+    <h2>Current Auctions</h2>
+    <?php
+
+        $sql2="SELECT * FROM auction WHERE status=0 ORDER BY auid DESC";
+        $records=mysqli_query($con,$sql2);
+
+        while($data = mysqli_fetch_array($records))
+        {
+            $auctfid=$data['fid'];
+
+            $farmersql="SELECT fname from farmer where fid=$auctfid";
+            $result=mysqli_query($con,$farmersql);
+            $record2=mysqli_fetch_assoc($result);
+            $fname=$record2['fname'];
+         ?>
+
+
+
+    <!-- Auction Cards -->
+    <div class="auction-main">
+        <?php 
+
+                if($data['crop']=="Wheat"){
+                echo"<img src='./assets/wheat.png' class='auct-img'>"; 
+                }
+                else if($data['crop']=="Coconut"){
+                echo"<img src='./assets/coconut.png' class='auct-img'>";
+                }
+                else{
+                echo"<img src='./assets/rice.png' class='auct-img'>";
+                }
+            ?>
+        <ul class="auct-items">
+            <li> Crop: <span style="font-weight: 600;">
+                    <?php echo $data['crop'] . " ( " . $data['quantity'] . "kg )"?>
+                </span></li>
+            <li>Auction By: <span style="font-weight: 600;">
+                    <?php echo $fname ?>
+                </span></li>
+            <li> <span style="font-size: small;">
+                    <?php echo "Description: " . $data['description']?>
+                </span></li>
+        </ul>
+        <div class="bid-items">
+            <li>Highest Bid: <span style="color: #94ee92;font-weight: 600;">₹ 15,000</span></li>
+            <li>By: <span style="font-weight: 600;">Athul Dinesan</span></li>
+        </div>
+    </div>
+</div>

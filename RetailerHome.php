@@ -1,4 +1,14 @@
+
+<?php
+include ("dbconfig.php");
+session_start();
+$rid=$_SESSION['rid'];
+$sql="select * from retailer where rid=$rid";
+$farmer=mysqli_query($con,$sql);
+$data=mysqli_fetch_assoc($farmer);
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmer</title>
-    <link rel="stylesheet" href="./assets/farmer.css">
+    <link rel="stylesheet" href="./assets/retailer.css">
 </head>
 
 <body>
@@ -17,23 +27,24 @@
             </div>
             <ul class="navig-items">
                 <li><a href="#">Home</a></li>
-                <li><a href="./AuctionTab.html">Auctions</a></li>
+                <li><a href="./AuctionTab.php">Auctions</a></li>
                 <li><a href="#">Demands</a></li>
             </ul>
             <div class="logout-btn">
-                <a href="#">Logout</a>
+                <a href="./logout.php">Logout</a>
             </div>
         </nav>
         <div class="navig-border"></div>
     </div>
     <div class="profile-container">
         <ul class="profile-items">
+        
             <li id="profile-name"><span style="color: #665F5F;">Hello</span> Anuroop Vijayan</li><br>
             <li><span id="profile-info">Status:</span> Online</li>
             <li><span id="profile-info">Total Auctions:</span> 27</li>
             <li><span id="profile-info">Total Earnings:</span> ₹ 27,000</li>
         </ul>
-        <img src="./assets/FarmerAvatar.png" class="farmer-avatar">
+        <img src="./assets/RetailerAvatar.png" class="farmer-avatar">
     </div>
 
     <div class="tab-container">
