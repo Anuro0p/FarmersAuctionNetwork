@@ -1,7 +1,6 @@
 <?php
-include ("session.php");
 include ("dbconfig.php");
-session_start();
+include ("session.php");
 $id=$_GET['id1'];
 $sql2="UPDATE farmer set isVerified=1 where fid=$id";
 $result1=mysqli_query($con,$sql2);

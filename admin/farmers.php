@@ -1,7 +1,6 @@
 <?php
-include ("session.php");
 include ("dbconfig.php");
-session_start();
+include ("session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
