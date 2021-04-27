@@ -86,6 +86,12 @@ li {
     width: 35vw;
 }
 
+.auct-items-mine li {
+    padding: 3px;
+    height: auto;
+    width: auto;
+}
+
 .bid-items li {
     padding: 3px;
 }

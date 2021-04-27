@@ -1,12 +1,13 @@
 <?php
     include_once("dbConfig.php");
     session_start();
-    // $_SESSION['fid']=1;
+    $_SESSION['rid']=1;
+    $rid=$_SESSION['rid'];
     $flg=0;
     $flg=$_GET['flg'];
-    if($flg==1||$flg==2){
-        echo "<script> alert('success') </script>";
-    }
+    // if($flg==1||$flg==2){
+    //     echo "<script> alert('success') </script>";
+    // }
 
 ?>
 
@@ -48,17 +49,29 @@
 
     <!--Demand Container-->
     <div class="auction-container">
-        <h2>Current Sales</h2>
+        
+        <h2>Accepted Offers yet to be delivered</h2>
+        <a href="counterDemand.php?flg=0"><input class="btn btn-secondary" type="button" value="view Counters"></a>
 
         <?php
 
+
         include "dbConfig.php"; // Using database connection file here
 
-        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=0;"); // fetch data from database
+        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=2 AND rid=$rid;"); // fetch data from database
         $fid = $_SESSION['fid'];
+
+
+        if(mysqli_num_rows($records)==0){
+            echo "<h1 style='margin-top :200px;'>Looks like you dont have any offers going on..</h1>";
+        }
 
         while($data = mysqli_fetch_array($records))
         {
+            $fid=$data['fid'];
+            $result = mysqli_query($con,"SELECT * FROM farmer where  fid=$fid");
+            $data1=mysqli_fetch_assoc($result);
+            
         ?>
 
         <div style="border:0px solid black; border-radius: 0px; box-shadow: 5px 10px 30px #888888; background-color:white; color:black" class="auction-main">
@@ -76,18 +89,24 @@
                 {
                 echo"<img src='./assets/150-1507350_transparent-vegetables-in-the-basket-png-png-download.png' class='auct-img'>";}
             ?>
-            <ul class="auct-items">
+            <ul class="auct-items-mine">
                 <li> Crop: <span style="font-weight: 600;"><?php echo $data['crop'] ?></span></li>
                 <li> <span style="font-size: small;">Description: <?php echo $data['description'] ?></span></li>
             </ul>
+
+            <ul  class="auct-items-mine">
+                <li> Name:   <span style="font-weight: 600;"><?php echo $data1['fname'] ?></span></li>
+                <li> <span style="font-size: small;">Address: <?php echo $data1['address'] ?></span></li>
+            </ul>
             <div class="bid-items">
-                <li>Price :  <span style="color: #green;font-weight: 600;">₹<?php echo $data['bazeprize'] ?></span></li>
+                <li>Phno :  <span style="color: #green;font-weight: 600;">+<?php echo $data1['phone'] ?></span></li>
             </div>
+
+            
 
             <!-- Button trigger modal -->
             <form >
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Counter</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenters<?php echo $data['did'] ?>">Sell</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Close</button>
             </form>
             
 
@@ -100,65 +119,27 @@
 
 
 
-            
-            <div class="modal fade" id="exampleModalCenters<?php echo $data['did'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Sell Confirmation</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="tradeConfirm.php">
-                                
-                                <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-                                <input type="hidden" id="custId" name="offerprice" value="<?php echo $data['bazeprize'] ?>">
-                                    <p style="color:black;">Do you wnat to confirm ?</p>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancell</button>
-                                    <button type="submit" class="btn btn-primary" >Confirm</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter<?php echo $data['did'] ?>"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Counter Offer</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Close Confirmation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="sellconfirm.php">
-                                <div class="form-group">
-                                    <label for="offerprice" style="color: black;">Offer Price</label>
-                                    <input type="number" class="form-control" name="offerprice" placeholder="Amount" required>
-                                </div>
+                            <form action="closeDemands.php">
+                                
 
                                 <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-
-                              
-
-
-
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Comments</label>
-                                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" placeholder="Enter any comments..." rows="3"></textarea>
-                                </div>
-                                    
+                                <p style="color:black;">Do you really want to close the order?</p>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" >Place</button>
+                                    <button type="submit" class="btn btn-primary" >Confirm</button>
                                 </div>
                             </form>
                         </div>

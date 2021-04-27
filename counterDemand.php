@@ -1,12 +1,13 @@
 <?php
     include_once("dbConfig.php");
     session_start();
-    // $_SESSION['fid']=1;
+    $_SESSION['rid']=1;
+    $rid=$_SESSION['rid'];
     $flg=0;
     $flg=$_GET['flg'];
-    if($flg==1||$flg==2){
-        echo "<script> alert('success') </script>";
-    }
+    // if($flg==1||$flg==2){
+    //     echo "<script> alert('success') </script>";
+    // }
 
 ?>
 
@@ -48,14 +49,19 @@
 
     <!--Demand Container-->
     <div class="auction-container">
-        <h2>Current Sales</h2>
+        <h2>Counter Offers</h2>
+        <a href="acceptedDemands.php?flg=0"><input class="btn btn-secondary" type="button" value="Confirmed orders"></a>
 
         <?php
 
         include "dbConfig.php"; // Using database connection file here
 
-        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=0;"); // fetch data from database
+        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=1 AND rid=$rid;"); // fetch data from database
         $fid = $_SESSION['fid'];
+
+        if(mysqli_num_rows($records)==0){
+            echo "<h1 style='margin-top :200px;'>Looks like you dont have any offers going on..</h1>";
+        }
 
         while($data = mysqli_fetch_array($records))
         {
@@ -76,18 +82,25 @@
                 {
                 echo"<img src='./assets/150-1507350_transparent-vegetables-in-the-basket-png-png-download.png' class='auct-img'>";}
             ?>
-            <ul class="auct-items">
+            <ul class="auct-items-mine">
                 <li> Crop: <span style="font-weight: 600;"><?php echo $data['crop'] ?></span></li>
                 <li> <span style="font-size: small;">Description: <?php echo $data['description'] ?></span></li>
+            </ul>
+
+            <ul  class="auct-items-mine">
+                <li> Offer: ₹  <span style="font-weight: 600;"><?php echo $data['offerprize'] ?></span></li>
+                <li> <span style="font-size: small;">message: <?php echo $data['message'] ?></span></li>
             </ul>
             <div class="bid-items">
                 <li>Price :  <span style="color: #green;font-weight: 600;">₹<?php echo $data['bazeprize'] ?></span></li>
             </div>
 
+            
+
             <!-- Button trigger modal -->
             <form >
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Counter</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenters<?php echo $data['did'] ?>">Sell</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Accept</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenters<?php echo $data['did'] ?>">Reject</button>
             </form>
             
 
@@ -105,19 +118,18 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Sell Confirmation</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Reject Confirmation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="tradeConfirm.php">
+                            <form action="rejectConfirm.php">
                                 
                                 <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-                                <input type="hidden" id="custId" name="offerprice" value="<?php echo $data['bazeprize'] ?>">
-                                    <p style="color:black;">Do you wnat to confirm ?</p>
+                                    <p style="color:black;">Do you wnat to confirm reject?</p>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancell</button>
+                                    
                                     <button type="submit" class="btn btn-primary" >Confirm</button>
                                 </div>
                             </form>
@@ -138,27 +150,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="sellconfirm.php">
-                                <div class="form-group">
-                                    <label for="offerprice" style="color: black;">Offer Price</label>
-                                    <input type="number" class="form-control" name="offerprice" placeholder="Amount" required>
-                                </div>
+                            <form action="acceptConfirm.php">
+                                
 
                                 <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-
-                              
-
-
-
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Comments</label>
-                                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" placeholder="Enter any comments..." rows="3"></textarea>
-                                </div>
-                                    
+                                <p style="color:black;">Do you wnat to Accept  offer?</p>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" >Place</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancell</button>
+                                    <button type="submit" class="btn btn-primary" >Confirm</button>
                                 </div>
                             </form>
                         </div>
