@@ -105,7 +105,7 @@ input:checked + label {
 
 .active-auct{
 padding: 1em;
-background-color:#4B4B4B;  
+background-color:#6C82BB;  
 border-radius: .2em;
 display: flex;
 justify-content: space-around;
@@ -174,15 +174,15 @@ while(($row=mysqli_fetch_array($s1))==TRUE)
 {?>
                                             <div class="active-auct">
                                                 <ul class="auct-items">
-                                                    <li> ID: <span style="font-weight: 600;"><?php echo $row[0];?></span></li>
-                                                    <li>Name: <span style="font-weight: 600;"><?php echo $row[1];?></span></li>
+                                                    <li> ID: <span style="font-weight:600;"><?php echo $row[0];?></span></li>
+                                                    <li>Name: <span style="font-weight:600;"><?php echo $row[1];?></span></li>
                                                 </ul>
                                                 <div class="bid-items">
                                                     <li>Phone no: <?php echo $row[2];?></li>
                                                     <li>Address: <?php echo $row[4];?></li>
                                                 </div>
-                                                <div class="btn cancel-btn"><a href="verify_farmer_action.php?id1=<?php echo $row[0];?>"style="color:green;font-weight:600;">Verify</a></div>
-                                                <div class="btn cancel-btn"><a href="decline_farmer_action.php?id1=<?php echo $row[0];?>"style="color:red;font-weight:600;">Decline</a></div>
+                                                <div class="btn cancel-btn"><a href="verify_farmer_action.php?id1=<?php echo $row[0];?>"style="color:#75E78E;font-weight:600;">Verify</a></div>
+                                                <div class="btn cancel-btn"><a href="decline_farmer_action.php?id1=<?php echo $row[0];?>"style="color:#CC5F5F;font-weight:600;">Decline</a></div>
                                             </div>
 <?php
 }
@@ -197,15 +197,15 @@ while(($row=mysqli_fetch_array($s1))==TRUE)
 {?>
                                         <div class="active-auct">
                                                 <ul class="auct-items">
-                                                    <li> ID: <span style="font-weight:900;"><?php echo $row[0];?></span></li>
-                                                    <li>Name: <span style="font-weight:900;"><?php echo $row[1];?></span></li>
+                                                    <li> ID: <span style="font-weight:600;"><?php echo $row[0];?></span></li>
+                                                    <li>Name: <span style="font-weight:600;"><?php echo $row[1];?></span></li>
                                                 </ul>
                                                 <div class="bid-items">
                                                     <li>Phone no: <?php echo $row[2];?></li>
                                                     <li>Address: <?php echo $row[4];?></li>
                                                 </div>
-                                                <div class="btn cancel-btn"><a href="verify_retailer_action.php?id1=<?php echo $row[0];?>"style="color:green;font-weight:600;">Verify</a></div>
-                                                <div class="btn cancel-btn"><a href="decline_retailer_action.php?id1=<?php echo $row[0];?>"style="color:red;font-weight:600;">Decline</a></div>
+                                                <div class="btn cancel-btn"><a href="verify_retailer_action.php?id1=<?php echo $row[0];?>"style="color:#75E78E;font-weight:600;">Verify</a></div>
+                                                <div class="btn cancel-btn"><a href="decline_retailer_action.php?id1=<?php echo $row[0];?>"style="color:#CC5F5F;font-weight:600;">Decline</a></div>
                                             </div>
 <?php
 }
