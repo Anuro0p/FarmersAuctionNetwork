@@ -1,4 +1,5 @@
 <?php
+include ("session.php");
 include ("dbconfig.php");
 session_start();
 ?>
