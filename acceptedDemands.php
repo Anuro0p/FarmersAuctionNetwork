@@ -32,6 +32,7 @@
                 <li><a href="./RetailerHome.php">Home</a></li>
                 <li><a href="AuctionTab.php">Auctions</a></li>
                 <li><a href="#">Demands</a></li>
+                <li><a href="CurrentDemands.php?flg=0">Listed</a></li>
             </ul>
             <div class="logout-btn">
                 <a href="./logout.php">Logout</a>

@@ -31,7 +31,7 @@
             <ul class="navig-items">
                 <li><a href="./RetailerHome.php">Home</a></li>
                 <li><a href="AuctionTab.php">Auctions</a></li>
-                <li><a href="#">Demands</a></li>
+                <li><a href="acceptedDemands.php?flg=0">Demands</a></li>
             </ul>
             <div class="logout-btn">
                 <a href="./logout.php">Logout</a>

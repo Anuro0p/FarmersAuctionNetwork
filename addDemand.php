@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once("dbConfig.php");
-echo".";
 if(isset($_POST['Submit'])) 
 {
     $rid=$_SESSION['rid'];
@@ -28,10 +27,27 @@ if(isset($_POST['Submit']))
 <meta name="author" content="Saurav">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="assets\css\demandStyles.css">
+<link rel="stylesheet" href="./assets/auctionstyle.css">
 <title>Demands</title>
 </head>
 
 <body class="bg-light">
+<div class="navigation">
+        <nav class="navig-bar">
+            <div class="logo">
+                Farmer Network
+            </div>
+            <ul class="navig-items">
+                <li><a href="./RetailerHome.php">Home</a></li>
+                <li><a href="AuctionTab.php">Auctions</a></li>
+                <li><a href="acceptedDemands.php?flg=0">Demands</a></li>
+            </ul>
+            <div class="logout-btn">
+                <a href="./logout.php">Logout</a>
+            </div>
+        </nav>
+        <div class="navig-border"></div>
+    </div>
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-md-6 bg-imgo">
