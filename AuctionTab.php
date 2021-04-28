@@ -9,8 +9,9 @@ if(isset($_POST['start'])){
     $description=$_POST['description'];
     $fid=$_SESSION['fid'];
     $date = date('Y-m-d');
+    $currprize=$basePrize;
 
-    $sql="INSERT INTO auction (crop,quantity,baseprize,description,fid,date,status) VALUES ('$cropSelect',$quantityCrop,$basePrize,'$description',$fid,'$date',0)";
+    $sql="INSERT INTO auction (crop,quantity,baseprize,currprize,description,fid,date,status) VALUES ('$cropSelect',$quantityCrop,$basePrize,$currprize,'$description',$fid,'$date',0)";
     $push=(mysqli_query($con,$sql));
     if($push){
         $succFlag=1;
@@ -56,7 +57,7 @@ else{
           echo "<div class='logout-btn'>";
 }
 ?>
-                <a href="#">Logout</a>
+                <a href="./logout.php">Logout</a>
             </div>
         </nav>
         <div class="navig-border"></div>
@@ -187,6 +188,7 @@ else{
             ?>
             <ul class="auct-items">
                 <li> Crop: <span style="font-weight: 600;"><?php echo $data['crop'] . " ( " . $data['quantity'] . "kg )"?></span></li>
+                <li> Base Prize:  <span style="font-weight: 600;">₹ <?php echo $data['baseprize']?></li>  
                 <li>Auction By: <span style="font-weight: 600;"><?php echo $fname ?></span></li>
                 <li> <span style="font-size: small;"><?php echo "Description: " . $data['description']?></span></li>
             </ul>
@@ -210,7 +212,7 @@ else{
     {
     ?>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['auid'] ?>">Bid</button>
+            <button type="button" class="btn btn-primary" style="padding:.5em 2em;" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['auid'] ?>">Bid</button>
 
     <?php
     }
@@ -223,17 +225,24 @@ else{
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Bid Your Amount <?php echo $data['auid']?> </h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Bid Your Amount</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
                         </div>
 
                         <div class="modal-body">
+                        <ul>
+                            <li style="font-weight: 600; color: black;"> Crop: <span><?php echo $data['crop'] . " ( " . $data['quantity'] . "kg )"?></span></li>
+                            <li style="font-weight: 600; color: black;"> Base Prize:  <span>₹ <?php echo $data['baseprize']?></li>  
+                            <li style="font-weight: 600; color: black;">Auction By: <span><?php echo $fname ?></span></li>
+                            <li style="font-size: small; color: black;"> <span><?php echo "Description: " . $data['description']?></span></li>
+                        </ul>
+
                             <form method="post">
                                 <div class="form-group">
                                     <label for="bidPrize" style="color: black;">Enter your bid amount for the crop</label>
-                                    <input type="number" class="form-control" name="bidPrize" placeholder="Amount" required min=<?php $data['currprize']?>>
+                                    <input type="number" class="form-control" name="bidPrize" placeholder="Amount" required min=<?php echo $data['currprize']?>>
                                     <input type="hidden" name="currId" value="<?php echo $data['auid'] ?>">
                                     <input type="hidden" name="retId" value="<?php echo $_SESSION['rid'] ?>">
                                 </div>
