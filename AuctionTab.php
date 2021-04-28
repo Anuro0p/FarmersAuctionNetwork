@@ -46,7 +46,12 @@ if(isset($_POST['start'])){
                 else echo "<li><a href='./RetailerHome.php'>Home</a></li>";
                 ?>
                 <li><a href="#">Auctions</a></li>
-                <li><a href="#">Demands</a></li>
+                <?php 
+                if($_SESSION['user']=='farmer'){
+                echo "<li><a href='./DemandTab.php?flg=0'>Demands</a></li>";
+                }
+                else echo "<li><a href='./acceptedDemands.php?flg=0'>Demands</a></li>";
+                ?>
             </ul>
 
 <?php

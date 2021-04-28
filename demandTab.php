@@ -29,12 +29,12 @@
                 Farmer Network
             </div>
             <ul class="navig-items">
-                <li><a href="./FarmerHome.html">Home</a></li>
-                <li><a href="#">Auctions</a></li>
+                <li><a href="./FarmerHome.php">Home</a></li>
+                <li><a href="AuctionTab.php">Auctions</a></li>
                 <li><a href="#">Demands</a></li>
             </ul>
             <div class="logout-btn">
-                <a href="#">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
         </nav>
         <div class="navig-border"></div>

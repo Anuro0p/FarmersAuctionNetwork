@@ -27,7 +27,7 @@ $data=mysqli_fetch_assoc($farmer);
             <ul class="navig-items">
                 <li><a href="#">Home</a></li>
                 <li><a href="./AuctionTab.php">Auctions</a></li>
-                <li><a href="#">Demands</a></li>
+                <li><a href="DemandTab.php?flg=0">Demands</a></li>
             </ul>
             <div class="logout-btn">
                 <a href="./logout.php">Logout</a>
@@ -38,7 +38,7 @@ $data=mysqli_fetch_assoc($farmer);
     <div class="profile-container">
         <ul class="profile-items">
         
-            <li id="profile-name"><span style="color: #665F5F;">Hello</span> Anuroop Vijayan</li><br>
+            <li id="profile-name"><span style="color: #665F5F;">Hello</span>  <?php echo $data['fname']?></li><br>
             <li><span id="profile-info">Status:</span> Online</li>
             <li><span id="profile-info">Total Auctions:</span> 27</li>
             <li><span id="profile-info">Total Earnings:</span> ₹ 27,000</li>

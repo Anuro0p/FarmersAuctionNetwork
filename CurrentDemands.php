@@ -29,7 +29,7 @@
                 Farmer Network
             </div>
             <ul class="navig-items">
-                <li><a href="./FarmerHome.html">Home</a></li>
+                <li><a href="./RetailerHome.php">Home</a></li>
                 <li><a href="AuctionTab.php">Auctions</a></li>
                 <li><a href="#">Demands</a></li>
             </ul>
@@ -48,14 +48,17 @@
 
     <!--Demand Container-->
     <div class="auction-container">
-        <h2>Counter Offers</h2>
-        <a href="acceptedDemands.php?flg=0"><input class="btn btn-secondary" type="button" value="Confirmed orders"></a>
+        
+        <h2>Your listed Demands</h2>
+        <a href="addDemand.php"><input class="btn btn-secondary" type="button" value="Add new demands"></a>
 
         <?php
 
+
         include "dbConfig.php"; // Using database connection file here
 
-        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=1 AND rid=$rid;"); // fetch data from database
+        $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=0 AND rid=$rid;"); // fetch data from database
+
 
         if(mysqli_num_rows($records)==0){
             echo "<h1 style='margin-top :200px;'>Looks like you dont have any offers going on..</h1>";
@@ -63,6 +66,7 @@
 
         while($data = mysqli_fetch_array($records))
         {
+            
         ?>
 
         <div style="border:0px solid black; border-radius: 0px; box-shadow: 5px 10px 30px #888888; background-color:white; color:black" class="auction-main">
@@ -80,14 +84,9 @@
                 {
                 echo"<img src='./assets/150-1507350_transparent-vegetables-in-the-basket-png-png-download.png' class='auct-img'>";}
             ?>
-            <ul class="auct-items-mine">
+            <ul class="auct-items">
                 <li> Crop: <span style="font-weight: 600;"><?php echo $data['crop'] ?></span></li>
                 <li> <span style="font-size: small;">Description: <?php echo $data['description'] ?></span></li>
-            </ul>
-
-            <ul  class="auct-items-mine">
-                <li> Offer: ₹  <span style="font-weight: 600;"><?php echo $data['offerprize'] ?></span></li>
-                <li> <span style="font-size: small;">message: <?php echo $data['message'] ?></span></li>
             </ul>
             <div class="bid-items">
                 <li>Price :  <span style="color: #green;font-weight: 600;">₹<?php echo $data['bazeprize'] ?></span></li>
@@ -97,8 +96,7 @@
 
             <!-- Button trigger modal -->
             <form >
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Accept</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenters<?php echo $data['did'] ?>">Reject</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $data['did'] ?>">Close</button>
             </form>
             
 
@@ -111,51 +109,27 @@
 
 
 
-            
-            <div class="modal fade" id="exampleModalCenters<?php echo $data['did'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Reject Confirmation</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="rejectConfirm.php">
-                                
-                                <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-                                    <p style="color:black;">Do you wnat to confirm reject?</p>
-                                <div class="modal-footer">
-                                    
-                                    <button type="submit" class="btn btn-primary" >Confirm</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter<?php echo $data['did'] ?>"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Counter Offer</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Cancel Confirmation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="acceptConfirm.php">
+                            <form action="closeDemands.php">
                                 
 
                                 <input type="hidden" id="custId" name="did" value="<?php echo $data['did'] ?>">
-                                <p style="color:black;">Do you wnat to Accept  offer?</p>
+                                <input type="hidden" id="matte" name="matte" value="1">
+                                <p style="color:black;">Do you really want to cancel the Demand?</p>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancell</button>
                                     <button type="submit" class="btn btn-primary" >Confirm</button>
                                 </div>
                             </form>

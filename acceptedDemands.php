@@ -1,7 +1,6 @@
 <?php
     include_once("dbConfig.php");
     session_start();
-    $_SESSION['rid']=1;
     $rid=$_SESSION['rid'];
     $flg=0;
     $flg=$_GET['flg'];
@@ -30,12 +29,12 @@
                 Farmer Network
             </div>
             <ul class="navig-items">
-                <li><a href="./FarmerHome.html">Home</a></li>
-                <li><a href="#">Auctions</a></li>
+                <li><a href="./RetailerHome.php">Home</a></li>
+                <li><a href="AuctionTab.php">Auctions</a></li>
                 <li><a href="#">Demands</a></li>
             </ul>
             <div class="logout-btn">
-                <a href="#">Logout</a>
+                <a href="./logout.php">Logout</a>
             </div>
         </nav>
         <div class="navig-border"></div>
@@ -59,7 +58,6 @@
         include "dbConfig.php"; // Using database connection file here
 
         $records = mysqli_query($con,"SELECT * FROM retailerdemand where status=2 AND rid=$rid;"); // fetch data from database
-        $fid = $_SESSION['fid'];
 
 
         if(mysqli_num_rows($records)==0){

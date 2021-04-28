@@ -13,7 +13,7 @@ if(isset($_POST['Submit']))
     $insertquery="INSERT INTO retailerdemand (`rid`, `crop`, `bazeprize`,`status`, `date`, `quantity`, `description`) VALUES (1,'$crop',$price,0,'$date',$quantity,'$description')";
     $result=(mysqli_query($con,$insertquery));
     echo "<script>alert('success..');</script>";
-    header("location:")    
+    header("location:CurrentDemands.php?flg=0");    
 }
 ?>
 
