@@ -4,7 +4,7 @@ session_start();
 $fid=$_SESSION['fid'];
 $sql="select * from farmer where fid=$fid";
 $farmer=mysqli_query($con,$sql);
-$data=mysqli_fetch_assoc($farmer);
+$data1=mysqli_fetch_assoc($farmer);
 
 if(isset($_POST['accept'])){
     $auid=$_POST['auid'];
@@ -54,7 +54,7 @@ elseif(isset($_POST['cancel'])){
     <div class="profile-container">
         <ul class="profile-items">
         
-            <li id="profile-name"><span style="color: #665F5F;">Hello</span> Anuroop Vijayan</li><br>
+            <li id="profile-name"><span style="color: #665F5F;">Hello </span><?php echo $data1['fname']?></li><br>
             <li><span id="profile-info">Status:</span> Online</li>
             <li><span id="profile-info">Total Auctions:</span> 27</li>
             <li><span id="profile-info">Total Earnings:</span> ₹ 27,000</li>

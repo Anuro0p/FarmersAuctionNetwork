@@ -4,8 +4,8 @@ include ("dbconfig.php");
 session_start();
 $rid=$_SESSION['rid'];
 $sql="select * from retailer where rid=$rid";
-$farmer=mysqli_query($con,$sql);
-$data=mysqli_fetch_assoc($farmer);
+$retailer=mysqli_query($con,$sql);
+$data1=mysqli_fetch_assoc($retailer);
 ?>
 <!DOCTYPE html>
 
@@ -39,7 +39,7 @@ $data=mysqli_fetch_assoc($farmer);
     <div class="profile-container">
         <ul class="profile-items">
         
-            <li id="profile-name"><span style="color: #665F5F;">Hello</span> Anuroop Vijayan</li><br>
+            <li id="profile-name"><span style="color: #665F5F;">Hello </span><?php echo $data1['rname'] ?></li><br>
             <li><span id="profile-info">Status:</span> Online</li>
             <li><span id="profile-info">Total Auctions:</span> 27</li>
             <li><span id="profile-info">Total Earnings:</span> ₹ 27,000</li>
